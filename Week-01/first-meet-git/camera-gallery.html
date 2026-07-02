@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camera Gallery</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a12;
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .noise {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            opacity: .035;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+            pointer-events: none;
+        }
+
+        .gradient-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 20%, rgba(233, 69, 96, .12) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 50% at 80% 80%, rgba(15, 52, 96, .25) 0%, transparent 60%),
+                radial-gradient(ellipse 50% 40% at 50% 50%, rgba(22, 33, 62, .4) 0%, transparent 60%);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 5rem 2rem 3rem;
+            position: relative;
+        }
+
+        .hero-icon {
+            font-size: 3rem;
+            margin-bottom: .75rem;
+            display: block;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #f5af19 0%, #f12711 50%, #e94560 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            margin-top: 1rem;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, .5);
+            font-weight: 300;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero p span {
+            color: rgba(255, 255, 255, .25);
+        }
+
+        .divider {
+            width: 80px;
+            height: 2px;
+            margin: 1.5rem auto 0;
+            background: linear-gradient(90deg, transparent, #e94560, transparent);
+            border-radius: 2px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-item .num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e94560, #f5af19);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-item .label {
+            font-size: .7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, .3);
+            margin-top: 2px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 2rem;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+        }
+
+        .card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, .04);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, .06);
+            transition: transform .5s cubic-bezier(.23, 1, .32, 1), box-shadow .5s ease;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp .7s ease forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: .05s; }
+        .card:nth-child(2) { animation-delay: .12s; }
+        .card:nth-child(3) { animation-delay: .19s; }
+        .card:nth-child(4) { animation-delay: .26s; }
+        .card:nth-child(5) { animation-delay: .33s; }
+        .card:nth-child(6) { animation-delay: .40s; }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.01);
+            box-shadow: 0 30px 60px rgba(233, 69, 96, .15), 0 10px 30px rgba(0, 0, 0, .4);
+            border-color: rgba(233, 69, 96, .2);
+        }
+
+        .card-img-wrap {
+            position: relative;
+            overflow: hidden;
+            height: 280px;
+        }
+
+        .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .6s cubic-bezier(.23, 1, .32, 1);
+        }
+
+        .card:hover .card-img-wrap img {
+            transform: scale(1.08);
+        }
+
+        .card-img-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(10, 10, 18, .9) 100%);
+            pointer-events: none;
+        }
+
+        .card-id {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 2;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, .5);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, .1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: .8rem;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .card-country {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 2;
+            font-size: 1.6rem;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, .5));
+        }
+
+        .card-body {
+            padding: 1.5rem 1.75rem 1.75rem;
+            position: relative;
+        }
+
+        .card-body h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: .15rem;
+            letter-spacing: .5px;
+        }
+
+        .card-body .sub {
+            color: rgba(255, 255, 255, .3);
+            font-size: .8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 400;
+            margin-bottom: .75rem;
+        }
+
+        .desc {
+            font-size: .82rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, .55);
+            margin-bottom: 1rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .specs {
+            display: flex;
+            gap: .6rem;
+            flex-wrap: wrap;
+        }
+
+        .specs .spec {
+            display: flex;
+            align-items: center;
+            gap: .35rem;
+            padding: .3rem .7rem;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, .05);
+            border: 1px solid rgba(255, 255, 255, .06);
+            font-size: .7rem;
+            color: rgba(255, 255, 255, .65);
+            font-weight: 500;
+            letter-spacing: .3px;
+        }
+
+        .specs .spec .ico {
+            font-size: .8rem;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            background: linear-gradient(135deg, rgba(255, 255, 255, .06) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity .5s ease;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        @media (max-width: 640px) {
+            .hero { padding: 3rem 1rem 2rem; }
+            .grid { padding: 0 1rem 3rem; gap: 1.5rem; }
+            .stats { gap: 2rem; }
+            .card-img-wrap { height: 220px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="noise"></div>
+    <div class="gradient-bg"></div>
+
+    <header class="hero">
+        <span class="hero-icon">&#x1F4F7;</span>
+        <h1>Camera Vault</h1>
+        <p>Classic film cameras &bull; <span>6 collections</span></p>
+        <div class="divider"></div>
+        <div class="stats">
+            <div class="stat-item">
+                <div class="num">6</div>
+                <div class="label">Cameras</div>
+            </div>
+            <div class="stat-item">
+                <div class="num">4</div>
+                <div class="label">Countries</div>
+            </div>
+            <div class="stat-item">
+                <div class="num">35mm</div>
+                <div class="label">Format</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="grid" id="cameraGrid"></div>
+
+    <script src="my-object.js"></script>
+    <script>
+        const grid = document.getElementById('cameraGrid');
+
+        cameraDatabase.forEach(cam => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card-img-wrap">
+                    <img src="${cam.image}" alt="${cam.name}" loading="lazy">
+                    <div class="card-id">${String(cam.id).padStart(2, '0')}</div>
+                    <div class="card-country">${cam.flag}</div>
+                </div>
+                <div class="card-body">
+                    <h2>${cam.name}</h2>
+                    <div class="sub">${cam.city}, ${cam.nation}</div>
+                    <div class="desc">${cam.description}</div>
+                    <div class="specs">
+                        <span class="spec"><span class="ico">&#x1F3AC;</span> ${cam.type}</span>
+                        <span class="spec"><span class="ico">&#x1F4D0;</span> ${cam.format}</span>
+                        <span class="spec"><span class="ico">&#x1F4C5;</span> ${cam.year}</span>
+                        <span class="spec"><span class="ico">&#x1F50D;</span> ${cam.lens}</span>
+                        <span class="spec"><span class="ico">&#x23F1;</span> ${cam.shutter}</span>
+                    </div>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+    </script>
+
+</body>
+</html>
