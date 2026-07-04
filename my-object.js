@@ -1,56 +1,101 @@
-// "Zenit", "Zorki", "Kiev", "Fed", "Exakta", "Fujica"
+// "Zenit-3m", "Zenit-E", "Zorki-3", "Kiev-17", "Kiev-88", "Fed-4", "Exakta-1b"
 
 let cameraDatabase = [
     { 
       id: 1,
-      name: "Zenit-E",
-      type: "Film",
-      format: "35mm",
-      nation: "USSR/Russia",
-      city: "Krasnogorsk",
-      description: "A popular Soviet SLR camera known for its durability and ease of use."
-    },
-    { 
-      id: 2,
-      name: "Zorki-3",
+      name: "Зенит-3М (Zenit-3M)",
       type: "Film",
       format: "35mm",
       nation: "USSR",
       city: "Krasnogorsk",
-      description: "A high-quality rangefinder camera inspired by Leica." 
+      year: "1962",
+      lens: "Helios-44 58mm",
+      shutter: "1/500s",
+      flag: "🇷🇺",
+      image: "Camera/Zenit-3m.jpg",
+      description: "A classic Soviet 35mm mechanical SLR camera manufactured by KMZ (Krasnogorsk Mechanical Plant) between 1962 and 1970."
+    },
+    { 
+      id: 2,
+      name: "Зенит-Е (Zenit-E)",
+      type: "Film",
+      format: "35mm",
+      nation: "USSR",
+      city: "Krasnogorsk",
+      year: "1965",
+      lens: "Industar-50 50mm",
+      shutter: "1/500s",
+      flag: "🇷🇺",
+      image: "Camera/Zenit-E.jpg",
+      description: "A popular Soviet SLR camera known for its durability, simplicity, and widespread ease of use."
     },
     { 
       id: 3,
-      name: "Kiev-17",
+      name: "Зоркий-3 (Zorki-3)",
       type: "Film",
       format: "35mm",
-      nation: "USSR/Ukraine",
-      city: "Kiev",
-      description:"A pioneering SLR camera using the Nikon-F mount, allowing the use of a wide variety of high-quality lenses."
+      nation: "USSR",
+      city: "Krasnogorsk",
+      year: "1951",
+      lens: "Jupiter-8 50mm",
+      shutter: "1/1000s",
+      flag: "🇷🇺",
+      image: "Camera/Zorki-3.jpg",
+      description: "The Zorki-3 is a highly regarded Soviet 35 mm rangefinder camera, moving away from the basic Leica II copy design."
     },
     { 
       id: 4,
-      name: "Fed-4",
+      name: "Киев-17 (Kiev-17)",
+      type: "Film",
+      format: "35mm",
+      nation: "Ukraine",
+      city: "Kiev",
+      year: "1977",
+      lens: "Helios-81N 50mm",
+      shutter: "1/1000s",
+      flag: "🇺🇦",
+      image: "Camera/Kiev-17.jpg",
+      description: "A pioneering Soviet SLR camera using the Nikon-F mount, allowing the use of a wide variety of high-quality lenses."
+    },
+    { 
+      id: 5,
+      name: "Киев-88 (Kiev-88)",
+      type: "Film",
+      format: "Medium Format",
+      nation: "USSR",
+      city: "Kiev",
+      year: "1980",
+      lens: "Volna-3 80mm",
+      shutter: "1/1000s",
+      flag: "🇺🇦",
+      image: "Camera/Kiev-88.jpg",
+      description: "The Kiev-88 is a Soviet-made medium format SLR camera famously known as an affordable alternative to the Hasselblad."
+    },
+    { 
+      id: 6,
+      name: "ФЭД-4 (Fed-4)",
       type: "Film",
       format: "35mm",
       nation: "USSR",
       city: "Kharkiv",
-      description: "A classia rangefinder camera with a built-in light meter, reflecting Soviet design style"
-    },
-    { 
-      id: 5,
+      year: "1964",
+      lens: "Industar-61 52mm",
+      shutter: "1/500s",
+      flag: "🇺🇦",
+      image: "Camera/Fed-4.jpg",
+      description: "A classic rangefinder camera with a built-in selenium light meter, reflecting iconic Soviet design style."
+    }
+    { id: 7,
       name: "Exakta-1b",
       type: "Film",
       format: "35mm",
       nation: "Germany",
-      city: "Dresden"
-    },
-    { 
-      id: 6,
-      name: "Fujica",
-      type: "Film",
-      format: "35mm",
-      nation: "Japan",
-      city: "Hakone"
+      city: "Dresden",
+      year: "1977",
+      lens: "Domiplan 50mm",
+      shutter: "1/1000s",
+      flag: "🇩🇪",
+      image: "Camera/Exa-1b.jpg",
+      description: "An elegant German 35mm SLR camera built in Dresden, continuing the historic Exakta heritage."
     }
 ]
