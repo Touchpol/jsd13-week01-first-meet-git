@@ -1,135 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RED Star Optik</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #1a1a2e;
-      color: #eee;
-      padding: 40px 20px;
-    }
-    h1 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-      color: #e94560;
-      letter-spacing: 2px;
-    }
-    .contact {
-      text-align: center;
-      font-size: 1rem;
-      margin-bottom: 40px;
-      color: #aaa;
-    }
-    .contact a {
-      color: #e94560;
-      text-decoration: none;
-    }
-    .contact a:hover { text-decoration: underline; }
-    .grid {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 30px;
-    }
-    .card {
-      background: #16213e;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.4);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 14px 36px rgba(233,69,96,0.15);
-    }
-    .card-img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      display: block;
-    }
-    .card-img[src=""],
-    .card-img:not([src]) { display: none; }
-    .card-body {
-      padding: 20px;
-    }
-    .card-body h2 {
-      font-size: 1.5rem;
-      margin-bottom: 12px;
-      color: #fff;
-    }
-    .card-body .flag { font-size: 1.3rem; }
-    .info {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px 16px;
-      font-size: 0.9rem;
-      margin-bottom: 14px;
-    }
-    .info .label { color: #888; }
-    .info .value { color: #ddd; }
-    .desc {
-      font-size: 0.9rem;
-      color: #aaa;
-      line-height: 1.5;
-      border-top: 1px solid #0f3460;
-      padding-top: 14px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vintage Camera Museum</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1a1a2e;
+            background-image: radial-gradient(ellipse at top, #16213e, #0f3460, #1a1a2e);
+            min-height: 100vh;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 20px 30px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f5af19, #f12711);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 2px;
+            text-shadow: none;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #8899aa;
+            margin-top: 8px;
+            letter-spacing: 4px;
+        }
+
+        .camera-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .camera-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .camera-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+        }
+
+        .camera-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .camera-body {
+            padding: 18px 20px 20px;
+        }
+
+        .camera-name {
+            font-size: 1.25em;
+            font-weight: 600;
+            color: #f5af19;
+            margin-bottom: 6px;
+        }
+
+        .camera-name .flag {
+            margin-left: 6px;
+        }
+
+        .camera-specs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+
+        .camera-specs .tag {
+            background: rgba(245, 175, 25, 0.15);
+            color: #f5c542;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78em;
+            font-weight: 500;
+            border: 1px solid rgba(245, 175, 25, 0.2);
+        }
+
+        .camera-desc {
+            font-size: 0.9em;
+            color: #b0b8c5;
+            line-height: 1.5;
+            margin-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 10px;
+        }
+
+        .contact-section {
+            max-width: 1300px;
+            margin: 40px auto 20px;
+            padding: 30px 20px;
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 1.6em;
+            color: #f5af19;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+
+        .contact-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.06);
+            padding: 14px 24px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.2s;
+        }
+
+        .contact-item:hover {
+            transform: scale(1.05);
+        }
+
+        .contact-item i {
+            font-size: 1.6em;
+        }
+
+        .contact-item .fa-facebook {
+            color: #1877f2;
+        }
+
+        .contact-item .fa-shopee {
+            color: #ee4d2d;
+        }
+
+        .contact-item .fa-phone-alt {
+            color: #25d366;
+        }
+
+        .contact-item .text {
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+        .contact-item .text .label {
+            color: #f5af19;
+            font-weight: 600;
+        }
+
+        .contact-item .text .value {
+            color: #e0e0e0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #667788;
+            font-size: 0.85em;
+        }
+
+        @media (max-width: 600px) {
+            .header h1 { font-size: 2em; }
+            .camera-grid { grid-template-columns: 1fr; padding: 10px; }
+            .contact-items { flex-direction: column; align-items: center; }
+        }
+    </style>
 </head>
 <body>
-  <h1>RED Star Optik</h1>
-  <div class="contact">
-    Facebook: <a href="https://facebook.com/RSO.REDStarOptik" target="_blank">RSO: RED Star Optik</a> &nbsp;|&nbsp;
-    Shopee: <a href="https://shopee.com/redstaroptik" target="_blank">Red Star Optik</a>
-  </div>
-  <div class="grid" id="cameraGrid"></div>
-  <script>
-    const cameraDatabase = [
-      { id: 1, name: "Зенит-3М (Zenit-3M)", type: "Film", format: "35mm", nation: "USSR", city: "Krasnogorsk", year: "1962", lens: "Helios-44 58mm", shutter: "1/500s", flag: "🇷🇺", image: "Camera/Zenit-3m.jpg", description: "A classic Soviet 35mm mechanical SLR camera manufactured by KMZ (Krasnogorsk Mechanical Plant) between 1962 and 1970." },
-      { id: 2, name: "Зенит-Е (Zenit-E)", type: "Film", format: "35mm", nation: "USSR", city: "Krasnogorsk", year: "1965", lens: "Industar-50 50mm", shutter: "1/500s", flag: "🇷🇺", image: "Camera/Zenit-E.jpg", description: "A popular Soviet SLR camera known for its durability, simplicity, and widespread ease of use." },
-      { id: 3, name: "Зоркий-3 (Zorki-3)", type: "Film", format: "35mm", nation: "USSR", city: "Krasnogorsk", year: "1951", lens: "Jupiter-8 50mm", shutter: "1/1000s", flag: "🇷🇺", image: "Camera/Zorki-3.jpg", description: "The Zorki-3 is a highly regarded Soviet 35 mm rangefinder camera, moving away from the basic Leica II copy design." },
-      { id: 4, name: "Киев-17 (Kiev-17)", type: "Film", format: "35mm", nation: "Ukraine", city: "Kiev", year: "1977", lens: "Helios-81N 50mm", shutter: "1/1000s", flag: "🇺🇦", image: "Camera/Kiev-17.jpg", description: "A pioneering Soviet SLR camera using the Nikon-F mount, allowing the use of a wide variety of high-quality lenses." },
-      { id: 5, name: "Киев-88 (Kiev-88)", type: "Film", format: "Medium Format", nation: "USSR", city: "Kiev", year: "1980", lens: "Volna-3 80mm", shutter: "1/1000s", flag: "🇺🇦", image: "Camera/Kiev-88.jpg", description: "The Kiev-88 is a Soviet-made medium format SLR camera famously known as an affordable alternative to the Hasselblad." },
-      { id: 6, name: "ФЭД-4 (Fed-4)", type: "Film", format: "35mm", nation: "USSR", city: "Kharkiv", year: "1964", lens: "Industar-61 52mm", shutter: "1/500s", flag: "🇺🇦", image: "Camera/Fed-4.jpg", description: "A classic rangefinder camera with a built-in selenium light meter, reflecting iconic Soviet design style." },
-      { id: 7, name: "Exakta-1b", type: "Film", format: "35mm", nation: "Germany", city: "Dresden", year: "1977", lens: "Domiplan 50mm", shutter: "1/1000s", flag: "🇩🇪", image: "Camera/Exa-1b.jpg", description: "An elegant German 35mm SLR camera built in Dresden, continuing the historic Exakta heritage." }
+
+<div class="header">
+    <h1>&#x1F4F7; Red Star Optik</h1>
+    <p>CLASSIC FILM CAMERAS FROM RUSSIA</p>
+</div>
+
+<div class="contact-section">
+    <h2><i class="fas fa-headset"></i> Contact Us</h2>
+    <div class="contact-items">
+        <div class="contact-item">
+            <i class="fab fa-facebook"></i>
+            <span class="text"><span class="label">RSO:</span><span class="value">Red Star Optik</span></span>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-bag-shopping" style="color:#ee4d2d;"></i>
+            <span class="text"><span class="label">Shopee:</span><span class="value">Red Star Optik</span></span>
+        </div>
+        <div class="contact-item">
+            <i class="fas fa-phone-alt"></i>
+            <span class="text"><span class="label">Tel:</span><span class="value">0957734065</span></span>
+        </div>
+    </div>
+</div>
+
+<div class="camera-grid" id="cameraGrid"></div>
+
+<div class="footer">
+    &copy; 2026 Vintage Camera Museum &mdash; Red Star Optik
+</div>
+
+<script>
+    let cameraDatabase = [
+        { 
+          id: 1,
+          name: "Зенит-3М (Zenit-3M)",
+          type: "Film",
+          format: "35mm",
+          nation: "USSR",
+          city: "Krasnogorsk",
+          year: "1962",
+          lens: "Helios-44 58mm",
+          shutter: "1/500s",
+          flag: "🇷🇺",
+          image: "Camera/Zenit-3m.jpg",
+          description: "A classic Soviet 35mm mechanical SLR camera manufactured by KMZ (Krasnogorsk Mechanical Plant) between 1962 and 1970."
+        },
+        { 
+          id: 2,
+          name: "Зенит-Е (Zenit-E)",
+          type: "Film",
+          format: "35mm",
+          nation: "USSR",
+          city: "Krasnogorsk",
+          year: "1965",
+          lens: "Industar-50 50mm",
+          shutter: "1/500s",
+          flag: "🇷🇺",
+          image: "Camera/Zenit-E.jpg",
+          description: "A popular Soviet SLR camera known for its durability, simplicity, and widespread ease of use."
+        },
+        { 
+          id: 3,
+          name: "Зоркий-3 (Zorki-3)",
+          type: "Film",
+          format: "35mm",
+          nation: "USSR",
+          city: "Krasnogorsk",
+          year: "1951",
+          lens: "Jupiter-8 50mm",
+          shutter: "1/1000s",
+          flag: "🇷🇺",
+          image: "Camera/Zorki-3.jpg",
+          description: "The Zorki-3 is a highly regarded Soviet 35 mm rangefinder camera, moving away from the basic Leica II copy design."
+        },
+        { 
+          id: 4,
+          name: "Киев-17 (Kiev-17)",
+          type: "Film",
+          format: "35mm",
+          nation: "Ukraine",
+          city: "Kiev",
+          year: "1977",
+          lens: "Helios-81N 50mm",
+          shutter: "1/1000s",
+          flag: "🇺🇦",
+          image: "Camera/Kiev-17.jpg",
+          description: "A pioneering Soviet SLR camera using the Nikon-F mount, allowing the use of a wide variety of high-quality lenses."
+        },
+        { 
+          id: 5,
+          name: "Киев-88 (Kiev-88)",
+          type: "Film",
+          format: "Medium Format",
+          nation: "USSR",
+          city: "Kiev",
+          year: "1980",
+          lens: "Volna-3 80mm",
+          shutter: "1/1000s",
+          flag: "🇺🇦",
+          image: "Camera/Kiev-88.jpg",
+          description: "The Kiev-88 is a Soviet-made medium format SLR camera famously known as an affordable alternative to the Hasselblad."
+        },
+        { 
+          id: 6,
+          name: "ФЭД-4 (Fed-4)",
+          type: "Film",
+          format: "35mm",
+          nation: "USSR",
+          city: "Kharkiv",
+          year: "1964",
+          lens: "Industar-61 52mm",
+          shutter: "1/500s",
+          flag: "🇺🇦",
+          image: "Camera/Fed-4.jpg",
+          description: "A classic rangefinder camera with a built-in selenium light meter, reflecting iconic Soviet design style."
+        },
+        { 
+          id: 7,
+          name: "Exakta-1b",
+          type: "Film",
+          format: "35mm",
+          nation: "Germany",
+          city: "Dresden",
+          year: "1977",
+          lens: "Domiplan 50mm",
+          shutter: "1/1000s",
+          flag: "🇩🇪",
+          image: "Camera/Exa-1b.jpg",
+          description: "An elegant German 35mm SLR camera built in Dresden, continuing the historic Exakta heritage."
+        }
     ];
 
     const grid = document.getElementById('cameraGrid');
+
     cameraDatabase.forEach(cam => {
-      const card = document.createElement('div');
-      card.className = 'card';
+        const card = document.createElement('div');
+        card.className = 'camera-card';
 
-      const img = document.createElement('img');
-      img.className = 'card-img';
-      img.alt = cam.name;
-      img.src = cam.image;
+        card.innerHTML = `
+            <img src="${cam.image}" alt="${cam.name}" class="camera-image" onerror="this.src='https://via.placeholder.com/400x220/333/888?text=No+Image'">
+            <div class="camera-body">
+                <div class="camera-name">${cam.name} <span class="flag">${cam.flag}</span></div>
+                <div class="camera-specs">
+                    <span class="tag">&#128247; ${cam.type}</span>
+                    <span class="tag">&#128207; ${cam.format}</span>
+                    <span class="tag">&#127758; ${cam.nation}</span>
+                    <span class="tag">&#127963; ${cam.city}</span>
+                    <span class="tag">&#128197; ${cam.year}</span>
+                    <span class="tag">&#128065; ${cam.lens}</span>
+                    <span class="tag">&#9889; ${cam.shutter}</span>
+                </div>
+                <div class="camera-desc">${cam.description}</div>
+            </div>
+        `;
 
-      const body = document.createElement('div');
-      body.className = 'card-body';
-      body.innerHTML = `
-        <h2>${cam.name} ${cam.flag}</h2>
-        <div class="info">
-          <span class="label">Type</span><span class="value">${cam.type}</span>
-          <span class="label">Format</span><span class="value">${cam.format}</span>
-          <span class="label">Country</span><span class="value">${cam.nation}, ${cam.city}</span>
-          <span class="label">Year</span><span class="value">${cam.year}</span>
-          <span class="label">Lens</span><span class="value">${cam.lens}</span>
-          <span class="label">Shutter</span><span class="value">${cam.shutter}</span>
-        </div>
-        <div class="desc">${cam.description}</div>
-      `;
-
-      card.appendChild(img);
-      card.appendChild(body);
-      grid.appendChild(card);
+        grid.appendChild(card);
     });
-  </script>
+</script>
+
 </body>
 </html>

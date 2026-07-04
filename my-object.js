@@ -3,7 +3,7 @@
 let cameraDatabase = [
     { 
       id: 1,
-      name: "Зенит-3М (Zenit-3M)",
+      name: "Зенит-3М (Zenit-3M))",
       type: "Film",
       format: "35mm",
       nation: "USSR",
@@ -84,7 +84,7 @@ let cameraDatabase = [
       flag: "🇺🇦",
       image: "Camera/Fed-4.jpg",
       description: "A classic rangefinder camera with a built-in selenium light meter, reflecting iconic Soviet design style."
-    }
+    },
     { id: 7,
       name: "Exakta-1b",
       type: "Film",
